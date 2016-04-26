@@ -16,7 +16,7 @@ Because there is no pull-up resistors in the Arduino and because 3.3 volts is wi
 "low" logic level range for the Arduino everything works as it should.
 
 RPI          |    | Arduino (Uno/Duemillanove)
---------------------------------------------
+-------------|----|-------------------------
 GPIO 0 (SDA) |<-->| Pin 4 (SDA)
 GPIO 1 (SCL) |<-->| Pin 5 (SCL)
 Ground       |<-->| Ground
@@ -24,7 +24,7 @@ Ground       |<-->| Ground
 ###Option of using level shifter###
 
 RPI            |             |Arduino (Uno/Duemillanove)
---------------------------------------------
+---------------|-------------|--------------
 GPIO0 (SDA) -- | TX1  -- TX0 | -- A4 (SDA)
 GPIO1 (SCL) -- | RX0  -- RX1 | -- A5 (SCL)
 3.3V        -- | LV   -- HV  | -- 5V
@@ -37,7 +37,7 @@ Configure Arduino As Slave Device For I2C
 
 Load this sketch on the Arduino. We basically define an address for the slave (in this case, 4)
 and callback functions for sending data, and receiving data. When we receive a digit, 
-we acknowledge by sending it back. If the digit happens to be ‘1’, we switch on the LED.
+we acknowledge by sending it back. If the digit happens to be '1', we switch on the LED.
 
 This program has only been tested with Arduino IDE 1.0.
 
@@ -58,7 +58,7 @@ void setup() {
   Wire.onReceive(receiveData);
   Wire.onRequest(sendData);
 
-  Serial.println(“Ready!”);
+  Serial.println("Ready!");
 }
 
 void loop() {
@@ -70,7 +70,7 @@ void receiveData(int byteCount){
 
   while(Wire.available()) {
     number = Wire.read();
-    Serial.print(“data received: “);
+    Serial.print("data received: ");
     Serial.println(number);
 
     if (number == 1){
@@ -108,7 +108,7 @@ In the video, I used a built-in programming tool called “IDLE” in Raspberry 
 
 import smbus
 import time
-# for RPI version 1, use “bus = smbus.SMBus(0)”
+# for RPI version 1, use "bus = smbus.SMBus(0)"
 bus = smbus.SMBus(1)
 
 # This is the address we setup in the Arduino Program
@@ -130,11 +130,15 @@ while True:
     continue
 
   writeNumber(var)
-  print “RPI: Hi Arduino, I sent you “, var
+  print "RPI: Hi Arduino, I sent you ", var
   # sleep one second
   time.sleep(1)
 
   number = readNumber()
-  print “Arduino: Hey RPI, I received a digit “, number
-  print
+  print "Arduino: Hey RPI, I received a digit ", number
+  print ""
 ```
+
+References
+----------
+https://oscarliang.com/raspberry-pi-arduino-connected-i2c/
