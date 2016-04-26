@@ -271,3 +271,29 @@ supported as they are indistinguishable from data.
 > S Addr Wr [A] Comm [A] Data [A] Data [A] ... [A] Data [A] P
 
 Functionality flag: **I2C_FUNC_SMBUS_WRITE_I2C_BLOCK**
+
+Python function summary
+-----------------------
+
+function                           |description                    | parameters               |return value
+-----------------------            |---------------------          |------------              |-------------
+SMBus Access
+write_quick(addr)                  |Quick transaction.             |int addr                  |long
+read_byte(addr)                    |Read Byte transaction.         |int addr                  |long
+write_byte(addr,val)               |Write Byte transaction.        |int addr,char val         |long
+read_byte_data(addr,cmd)           |Read Byte Data transaction.    |int addr,char cmd         |long
+write_byte_data(addr,cmd,val)      |Write Byte Data transaction.   |int addr,char cmd,char val|long
+read_word_data(addr,cmd)           |Read Word Data transaction.    |int addr,char cmd         |long
+write_word_data(addr,cmd,val)      |Write Word Data transaction.   |int addr,char cmd,int val |long
+process_call(addr,cmd,val)         |Process Call transaction.      |int addr,char cmd,int val |long
+read_block_data(addr,cmd)          |Read Block Data transaction.   |int addr,char cmd         |long[]
+write_block_data(addr,cmd,vals)    |Write Block Data transaction.  |int addr,char cmd,long[]  |None
+block_process_call(addr,cmd,vals)  |Block Process Call transaction.|int addr,char cmd,long[]  |long[]
+I2C Access
+read_i2c_block_data(addr,cmd)      |Block Read transaction.        |int addr,char cmd         |long[]
+write_i2c_block_data(addr,cmd,vals)|Block Write transaction.       |int addr,char cmd,long[]  |None
+
+References
+----------
+https://www.kernel.org/doc/Documentation/i2c/smbus-protocol
+http://wiki.erazor-zone.de/wiki:linux:python:smbus:doc?s[]=write&s[]=word&s[]=data
