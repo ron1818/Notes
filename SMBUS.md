@@ -277,7 +277,7 @@ Python function summary
 
 function                           |description                    | parameters               |return value
 -----------------------            |---------------------          |------------              |-------------
-SMBus Access
+SMBus Access                       |
 write_quick(addr)                  |Quick transaction.             |int addr                  |long
 read_byte(addr)                    |Read Byte transaction.         |int addr                  |long
 write_byte(addr,val)               |Write Byte transaction.        |int addr,char val         |long
@@ -289,11 +289,12 @@ process_call(addr,cmd,val)         |Process Call transaction.      |int addr,cha
 read_block_data(addr,cmd)          |Read Block Data transaction.   |int addr,char cmd         |long[]
 write_block_data(addr,cmd,vals)    |Write Block Data transaction.  |int addr,char cmd,long[]  |None
 block_process_call(addr,cmd,vals)  |Block Process Call transaction.|int addr,char cmd,long[]  |long[]
-I2C Access
+I2C Access                         |
 read_i2c_block_data(addr,cmd)      |Block Read transaction.        |int addr,char cmd         |long[]
 write_i2c_block_data(addr,cmd,vals)|Block Write transaction.       |int addr,char cmd,long[]  |None
 
 References
 ----------
 https://www.kernel.org/doc/Documentation/i2c/smbus-protocol
+
 http://wiki.erazor-zone.de/wiki:linux:python:smbus:doc?s[]=write&s[]=word&s[]=data
