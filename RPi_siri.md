@@ -16,13 +16,13 @@ Speech to text
 ```bash
 #!/bin/bash
 
-echo “Recording… Press Ctrl+C to Stop.”
-arecord -D “plughw:1,0” -q -f cd -t wav | ffmpeg -loglevel panic -y -i – -ar 16000 -acodec flac file.flac > /dev/null 2>&1
+echo "Recording… Press Ctrl+C to Stop."
+arecord -D "plughw:1,0" -q -f cd -t wav | ffmpeg -loglevel panic -y -i – -ar 16000 -acodec flac file.flac > /dev/null 2>&1
 
-echo “Processing…”
-wget -q -U “Mozilla/5.0” –post-file file.flac –header “Content-Type: audio/x-flac; rate=16000” -O – “http://www.google.com/speech-api/v1/recognize?lang=en-us&client=chromium” | cut -d” -f12 >stt.txt
+echo "Processing…"
+wget -q -U "Mozilla/5.0" –post-file file.flac –header "Content-Type: audio/x-flac; rate=16000" -O – "http://www.google.com/speech-api/v1/recognize?lang=en-us&client=chromium" | cut -d" -f12 >stt.txt
 
-echo -n “You Said: ”
+echo -n "You Said: ”"
 cat stt.txt
 
 rm file.flac > /dev/null 2>&1
@@ -68,25 +68,25 @@ import sys
 
 # Get a free API key here http://products.wolframalpha.com/api/
 # This is a fake ID, go and get your own, instructions on my blog.
-app_id=’HYO4TL-A9QOUALOPX’
+app_id='HYO4TL-A9QOUALOPX'
 
 client = wolframalpha.Client(app_id)
 
-query = ‘ ‘.join(sys.argv[1:])
+query = ' '.join(sys.argv[1:])
 res = client.query(query)
 
 if len(res.pods) > 0:
-  texts = “”
+  texts = ""
   pod = res.pods[1]
   if pod.text:
     texts = pod.text
   else:
-    texts = “I have no answer for that”
+    texts = "I have no answer for that"
   # to skip ascii character in case of error
-  texts = texts.encode(‘ascii’, ‘ignore’)
+  texts = texts.encode('ascii', 'ignore')
   print texts
 else:
-  print “Sorry, I am not sure.”
+  print "Sorry, I am not sure."
 ```
 
 > chmod +x ./queryprocess.py
@@ -105,7 +105,7 @@ Text to Speech
 *text2speech.sh*
 ```bash
 #!/bin/bash
-say() { local IFS=+;/usr/bin/mplayer -ao alsa -really-quiet -noconsolecontrols “http://translate.google.com/translate_tts?tl=en&q=$*”; }
+say() { local IFS=+;/usr/bin/mplayer -ao alsa -really-quiet -noconsolecontrols "http://translate.google.com/translate_tts?tl=en&q=$*"; }
 say $*
 ```
 
@@ -131,23 +131,23 @@ I modified the original script is from here to fit into our application.
 INPUT=$*
 STRINGNUM=0
 ary=($INPUT)
-for key in “${!ary[@]}”
+for key in "${!ary[@]}"
 do
-SHORTTMP[$STRINGNUM]=”${SHORTTMP[$STRINGNUM]} ${ary[$key]}”
+SHORTTMP[$STRINGNUM]="${SHORTTMP[$STRINGNUM]} ${ary[$key]}"
 LENGTH=$(echo ${#SHORTTMP[$STRINGNUM]})
 
-if [[ “$LENGTH” -lt “100” ]]; then
+if [[ "$LENGTH" -lt "100" ]]; then
 
 SHORT[$STRINGNUM]=${SHORTTMP[$STRINGNUM]}
 else
 STRINGNUM=$(($STRINGNUM+1))
-SHORTTMP[$STRINGNUM]=”${ary[$key]}”
-SHORT[$STRINGNUM]=”${ary[$key]}”
+SHORTTMP[$STRINGNUM]="${ary[$key]}"
+SHORT[$STRINGNUM]="${ary[$key]}"
 fi
 done
-for key in “${!SHORT[@]}”
+for key in "${!SHORT[@]}"
 do
-say() { local IFS=+;/usr/bin/mplayer -ao alsa -really-quiet -noconsolecontrols “http://translate.google.com/translate_tts?tl=en&q=${SHORT[$key]}”; }
+say() { local IFS=+;/usr/bin/mplayer -ao alsa -really-quiet -noconsolecontrols "http://translate.google.com/translate_tts?tl=en&q=${SHORT[$key]}"; }
 say $*
 done
 ```
@@ -160,15 +160,15 @@ Toplevel
 ```bash
 #!/bin/bash
 
-echo “Recording… Press Ctrl+C to Stop.”
+echo "Recording… Press Ctrl+C to Stop."
 
 ./speech2text.sh
 
 QUESTION=$(cat stt.txt)
-echo “Me: “, $QUESTION
+echo "Me: ", $QUESTION
 
 ANSWER=$(python queryprocess.py $QUESTION)
-echo “Robot: “, $ANSWER
+echo "Robot: ", $ANSWER
 
 ./text2speech.sh $ANSWER
 ```
