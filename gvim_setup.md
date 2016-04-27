@@ -167,4 +167,5 @@ add python run and debug in F3 and F4
 -------------------------------------
 ```vimrc
 nnoremap <silent> <F3> :w<CR>:!clear;python %<CR>
+nnoremap <silent> <F4> :w<CR>:!gnome-terminal -e python -m pudb.run %<CR>
 ```
