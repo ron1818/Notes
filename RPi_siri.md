@@ -37,8 +37,10 @@ rm file.flac
 ```
 
 ###execute###
-> chmod +x speech2text.sh
-> ./speech2text.sh
+```bash
+chmod +x speech2text.sh
+./speech2text.sh
+```
 
 Query Processing
 ----------------
@@ -46,9 +48,11 @@ Query Processing
 
 python Wolfram Alpha library can do the job
 
-> apt-get install python-setuptools easy_install pip
-> sudo python setup.py build
-> sudo python setup.py
+```bash
+apt-get install python-setuptools easy_install pip
+sudo python setup.py build
+sudo python setup.py
+```
 
 must signup [online](http://products.wolframalpha.com/api/) for an ID
 
@@ -89,17 +93,19 @@ else:
   print "Sorry, I am not sure."
 ```
 
-> chmod +x ./queryprocess.py
+`chmod +x ./queryprocess.py`
 e.g.: 
-> ./queryprocess.py "what time is it"
+`./queryprocess.py "what time is it"`
 
 Text to Speech
 --------------
 ###audio playback###
 
-> sudo apt-get install mplayer
-> sudo nano /etc/mplayer/mplayer.conf
-> nolirc=yes
+```bash
+sudo apt-get install mplayer
+sudo nano /etc/mplayer/mplayer.conf
+nolirc=yes
+```
 
 ###text to speech###
 *text2speech.sh*
@@ -109,10 +115,10 @@ say() { local IFS=+;/usr/bin/mplayer -ao alsa -really-quiet -noconsolecontrols "
 say $*
 ```
 
-> chmod +x text2speech.sh
+`chmod +x text2speech.sh`
 
 e.g.:
-> ./text2speech.sh "My name is Oscar and I am testing the audio."
+`./text2speech.sh "My name is Oscar and I am testing the audio."`
 
 ###Google Text To Speech Text Length Limitation###
 
