@@ -172,3 +172,10 @@ nnoremap <silent> <F4> :w<CR>:!gnome-terminal -e python -m pudb.run %<CR>
 " for RPi:
 nnoremap <silent> <F4> :w<CR>:!lxterminal -e python -m pudb.run %<CR>
 ```
+canberra-gtk-module
+-------------------
+`sudo apt-get install libcanberra-gtk-module`
+
+Or if it's already installed and you still get the error:
+
+`sudo apt-get install libcanberra-gtk-module:i386`
