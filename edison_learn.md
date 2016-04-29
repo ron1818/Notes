@@ -43,11 +43,11 @@ Repository
 `vim etc/opkg/base-feeds.conf`
 
 add following into:
-===/etc/opkg/base-feeds.conf contents below===
+```
 src/gz all http://repo.opkg.net/edison/repo/all
 src/gz edison http://repo.opkg.net/edison/repo/edison
 src/gz core2-32 http://repo.opkg.net/edison/repo/core2-32
-===end of /etc/opkg/base-feeds.conf contents===
+```
 
 `opkg update`
 
@@ -89,9 +89,17 @@ quit
 ```
 
 ###Use gatttool to read sensor values###
-`gatttool -b 34:B1:F7:D5:15:38 -I`
+`gatttool -b 34:B1:F7:D5:15:38 -I -t random`
 
 -I or --interactive
+
+```bash
+connect
+primary
+characteristics
+char-read-uuid 0x2902
+char-write-req 0x0018 0100
+```
 
 References
 -----------
