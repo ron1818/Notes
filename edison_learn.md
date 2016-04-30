@@ -100,6 +100,10 @@ characteristics
 char-read-uuid 0x2902
 char-write-req 0x0018 0100
 ```
+###ethernet over usb###
+`sudo ifconfig usb0 192.168.2.2`
+
+then edison's address is **192.168.2.15** or **edison.local**
 
 References
 -----------
