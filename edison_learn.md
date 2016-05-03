@@ -105,6 +105,9 @@ char-write-req 0x0018 0100
 
 then edison's address is **192.168.2.15** or **edison.local**
 
+*Note*: for first setup, only SSH over usb is enabled. Must run `configure_edison --setup` with
+password and Wifi, then can SSH over wifi
+
 References
 -----------
 https://software.intel.com/en-us/iot/library/edison-getting-started
