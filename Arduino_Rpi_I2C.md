@@ -139,6 +139,10 @@ while True:
   print ""
 ```
 
+i2c dev without root permission
+----
+`sudo adduser pi i2c`
+
 References
 ----------
 https://oscarliang.com/raspberry-pi-arduino-connected-i2c/
