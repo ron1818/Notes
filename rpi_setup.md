@@ -18,8 +18,13 @@ sudo hwclock -s
 ```
 8 change executable to */etc/rc.local* by `sudo chmod +x /etc/rc.local`
 
-disable login keyring password
+Disable login keyring password
 -------------------------------
 applied for ubuntu-14.04 for arm
 
 `python -c "import gnomekeyring;gnomekeyring.change_password_sync('login', 'MYPASSWORD', '');"`
+
+
+References
+----------
+http://askubuntu.com/questions/867/how-can-i-stop-being-prompted-to-unlock-the-default-keyring-on-boot
