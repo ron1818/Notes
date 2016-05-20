@@ -29,6 +29,26 @@ I2C add user
 -----------
 `sudo adduser <username> i2c`
 
+Wpa for NTUSECURE
+-----------------
+for raspian only, ubuntu for arm can be set at desktop
+
+edit: */etc/wpa_supplicant/wpa_supplicant.conf*
+
+```
+network={
+    ssid="NTUSECURE"
+    scan_ssid=1
+    key_mgmt=WPA-EAP IEEE8021X
+    group=CCMP TKIP
+    eap=PEAP TLS
+    identity="<name>"
+    password="<password>"
+    phase2="auth=MSCHAPV2"
+}
+```
+
+
 References
 ----------
 http://askubuntu.com/questions/867/how-can-i-stop-being-prompted-to-unlock-the-default-keyring-on-boot
