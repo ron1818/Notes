@@ -25,6 +25,9 @@ applied for ubuntu-14.04 for arm
 
 `python -c "import gnomekeyring;gnomekeyring.change_password_sync('login', 'MYPASSWORD', '');"`
 
+I2C add user
+-----------
+`sudo adduser <username> i2c`
 
 References
 ----------
