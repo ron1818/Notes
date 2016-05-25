@@ -11,7 +11,7 @@ require *i2c-tools* to be installed
 3. run: `echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device`. 
 4. exit by `exit`. 
 5. verify with `sudo hwclock -w` and `sudo hwclock -r`. 
-6. edit */etc/modules* and add `rtc-ds1307 at the end. 
+6. edit */etc/modules* and add `rtc-ds1307` at the end. 
 7. edit */etc/rc.local* and add:
     ```
     echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device \n\r
@@ -114,13 +114,15 @@ this will download all dependencies, and configure everything.
 ubuntu sudo without password
 ----------------------------
 
-Add the user to sudo'ers - this enables sudo to be used without entering a password (may be necessary for some scripts for Raspbian to run):
-CODE: SELECT ALL
-sudo visudo
+###Add the user to sudo'ers###
+- this enables sudo to be used without entering a password (may be necessary for some scripts for Raspbian to run):
+`sudo visudo`
+
 Place this line at the END of the file - replace 'user' with username:
-CODE: SELECT ALL
-user ALL=(ALL) NOPASSWD: ALL
+`user ALL=(ALL) NOPASSWD: ALL`
+
 Save and exit (CTRL+O then CTRL+X).
+
 References
 ----------
 http://askubuntu.com/questions/867/how-can-i-stop-being-prompted-to-unlock-the-default-keyring-on-boot
