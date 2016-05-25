@@ -94,9 +94,27 @@ Put the public key in `.ssh/authorized_keys2`
 Change the permissions of `.ssh to 700`
 Change the permissions of `.ssh/authorized_keys2 to 640`
 
+libegl1-mesa-dev problem
+------------------------
+I solved this by doing the following:
+
+I used : `sudo apt-get download <package>`
+to download the packages (the two listed after you ran `apt-get install -f`).
+
+Then I used: `dpkg -i --force-overwrite <package_name.deb>`
+to install the packages with forcing overwrites of files from other packages.
+
+For *libegl1-mesa-dev*, it installed, but it failed to configure because it was missing other dependencies. Don't worry, we fix this in a second...
+
+I then ran dpkg with force overwrite for the second package (*libgles2...*) the same way. It installed, but did not configure because libegl1 did not finish configuring...
+
+now run: `sudo apt-get install -f`
+this will download all dependencies, and configure everything.
 
 References
 ----------
 http://askubuntu.com/questions/867/how-can-i-stop-being-prompted-to-unlock-the-default-keyring-on-boot
 
 http://www.linuxproblem.org/art_9.html
+
+https://www.raspberrypi.org/forums/viewtopic.php?f=56&t=100553&start=200
