@@ -111,6 +111,16 @@ I then ran dpkg with force overwrite for the second package (*libgles2...*) the 
 now run: `sudo apt-get install -f`
 this will download all dependencies, and configure everything.
 
+ubuntu sudo without password
+----------------------------
+
+Add the user to sudo'ers - this enables sudo to be used without entering a password (may be necessary for some scripts for Raspbian to run):
+CODE: SELECT ALL
+sudo visudo
+Place this line at the END of the file - replace 'user' with username:
+CODE: SELECT ALL
+user ALL=(ALL) NOPASSWD: ALL
+Save and exit (CTRL+O then CTRL+X).
 References
 ----------
 http://askubuntu.com/questions/867/how-can-i-stop-being-prompted-to-unlock-the-default-keyring-on-boot
@@ -118,3 +128,5 @@ http://askubuntu.com/questions/867/how-can-i-stop-being-prompted-to-unlock-the-d
 http://www.linuxproblem.org/art_9.html
 
 https://www.raspberrypi.org/forums/viewtopic.php?f=56&t=100553&start=200
+
+https://www.raspberrypi.org/forums/viewtopic.php?f=56&t=112253
