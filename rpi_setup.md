@@ -19,11 +19,7 @@ require *i2c-tools* to be installed
     ```.
 8. change executable to */etc/rc.local* by `sudo chmod +x /etc/rc.local`.
 
-Disable login keyring password
--------------------------------
-applied for ubuntu-14.04 for arm
 
-`python -c "import gnomekeyring;gnomekeyring.change_password_sync('login', 'MYPASSWORD', '');"`
 
 I2C add user
 -----------
@@ -122,6 +118,63 @@ Place this line at the END of the file - replace 'user' with username:
 `user ALL=(ALL) NOPASSWD: ALL`
 
 Save and exit (CTRL+O then CTRL+X).
+
+RPI with ubuntu14.04LTS
+=======================
+Usage
+-----
+
+###ROOT RESIZE###
+
+There are no Raspbian-specific utilities included, specifically no automatic root resizer. However, it's not hard to do manually. Once booted:
+
+`sudo fdisk /dev/mmcblk0`
+
+Delete the second partition (d, 2), then re-create it using the defaults (n, p, 2, enter, enter), then write and exit (w). Reboot the system, then:
+
+`sudo resize2fs /dev/mmcblk0p2`
+
+###SWAP###
+
+There is no swap partition/file included. If you want swap, it's recommended you do:
+
+`sudo apt-get install dphys-swapfile`
+
+You should have a (resized) SD card at least 4GB, because by default it will want to create a ~2GB swapfile.
+
+###WIFI FIRMWARE###
+
+If you are using a wifi dongle, you will likely need to get the linux-firmware package:
+
+`sudo apt-get install linux-firmware`
+
+###SSH SERVER###
+
+
+If you would like to install an SSH server for remote access:
+
+`sudo apt-get install openssh-server`
+
+###SERIAL CONSOLE###
+
+To enable the serial console, change the */boot/cmdline.txt* as follows:
+
+`dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootwait`
+
+and add a new file */etc/init/ttyAMA0.conf*:
+```
+start on stopped rc or RUNLEVEL=[12345]
+stop on runlevel [!12345]
+
+respawn
+exec /sbin/getty -L 115200 ttyAMA0 vt102
+```
+
+Disable login keyring password
+-------------------------------
+applied for ubuntu-14.04 for arm
+
+`python -c "import gnomekeyring;gnomekeyring.change_password_sync('login', 'MYPASSWORD', '');"`
 
 References
 ----------
