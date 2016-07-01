@@ -155,6 +155,37 @@ If you would like to install an SSH server for remote access:
 
 `sudo apt-get install openssh-server`
 
+###WPA SUPPLICANT###
+
+`sudo apt-get install wpasupplicant`
+
+Using either DHCP or a static config (doesn't matter which)--AND assuming your wifi worked during install--make your /etc/network/interfaces look something like below (for wlan0 should match the name of your wifi card listed under ifconfig -a e.g. your detected wifi card could be nicknamed eth1 by the OS for all I know.):
+
+``` bash
+ auto lo iface lo inet loopback     
+ auto wlan0 iface wlan0 inet dhcp    
+ wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+ ```
+To configure wpa_supplicant use the command (Referenced in the config above)
+
+`wpa_passphrase "YOUR_SSID" SSID_PASSWORD | sudo tee /etc/wpa_supplicant/wpa_supplicant.conf`
+
+Next, create a new executable script named iwconfig (you can name this script anything really, "iwconfig-default-ssid", perhaps?--I just made it short for the example):
+
+```
+sudo touch /etc/network/if-up.d/iwconfig && sudo chmod 700
+/etc/network/if-up.d/iwconfig && sudo ln -s
+/etc/network/if-up.d/iwconfig /etc/network/if-pre-up.d/iwconfig
+```
+Now edit /etc/network/if-up.d/iwconfig and add the SSID you want Ubuntu Server to connect to on startup:
+
+```
+#!/bin/sh
+iwconfig wlan0 essid "YOUR_DEFAULT_SSID" mode managed
+```
+
+Now bring ifdown (if you haven't already), then ifup, and you should be golden now and when you reboot (as long as you're near your SSID.)
+
 ###SERIAL CONSOLE###
 
 To enable the serial console, change the */boot/cmdline.txt* as follows:
@@ -185,3 +216,5 @@ http://www.linuxproblem.org/art_9.html
 https://www.raspberrypi.org/forums/viewtopic.php?f=56&t=100553&start=200
 
 https://www.raspberrypi.org/forums/viewtopic.php?f=56&t=112253
+
+http://askubuntu.com/questions/464507/ubuntu-14-04-server-wifi-wpa2-personal
