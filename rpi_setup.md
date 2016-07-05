@@ -207,6 +207,16 @@ applied for ubuntu-14.04 for arm
 
 `python -c "import gnomekeyring;gnomekeyring.change_password_sync('login', 'MYPASSWORD', '');"`
 
+Automatic login in commandline
+------------------------------
+To enable automatic login in Ubuntu server we need to edit the tty1 configuration file. To open this file up in nano use the following command:
+
+`sudo nano /etc/init/tty1.conf`
+The very last line in this file should start with an exec command. Delete this line and replace it with the following:
+
+`exec /bin/login -f USERNAME < /dev/tty1 > /dev/tty1 2>&1`
+Note that you need to change USERNAME to the username of the user that you want to be automatically logged in. Once you reboot your system you should be automatically logged in.
+
 References
 ----------
 http://askubuntu.com/questions/867/how-can-i-stop-being-prompted-to-unlock-the-default-keyring-on-boot
