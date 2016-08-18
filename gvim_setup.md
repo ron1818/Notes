@@ -171,9 +171,9 @@ add python run and debug in F3 and F4
 ```vim
 nnoremap <silent> <F3> :w<CR>:!clear;python %<CR>
 " for ubuntu
-nnoremap <silent> <F4> :w<CR>:!gnome-terminal -e python -m pudb.run %<CR>
+nnoremap <silent> <F4> :w<CR>:!gnome-terminal --maximize -e 'python -m pudb.run %'<CR>
 " for RPi:
-nnoremap <silent> <F4> :w<CR>:!lxterminal -e python -m pudb.run %<CR>
+nnoremap <silent> <F4> :w<CR>:!lxterminal -e 'python -m pudb.run %'<CR>
 ```
 canberra-gtk-module
 -------------------
